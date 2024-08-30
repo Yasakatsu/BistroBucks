@@ -98,5 +98,6 @@ DB_PASSWORD: データベースのパスワード
 このプロジェクトへの貢献を歓迎します。バグ報告、機能提案、プルリクエストをお待ちしています。貢献ガイドラインに従ってください。
 # 9. 著者 (Author)
 開発者：Tsukasa Osanai
+
 連絡先：chappieoct4@gmail.com
 # 10. 参考資料 (Acknowledgments)
