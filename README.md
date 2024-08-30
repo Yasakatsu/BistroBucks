@@ -91,7 +91,8 @@ DB_USERNAME: データベースのユーザー名
 DB_PASSWORD: データベースのパスワード
 # 7. ライセンス (License)
 
-このプロジェクトは MIT License のもとで公開されています。
+このプロジェクトは [MIT License](https://opensource.org/license/mit) のもとで公開されています。
+
 # 8. 開発に参加する (Contributing)
 
 このプロジェクトへの貢献を歓迎します。バグ報告、機能提案、プルリクエストをお待ちしています。貢献ガイドラインに従ってください。
