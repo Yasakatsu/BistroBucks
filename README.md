@@ -77,7 +77,8 @@ BistroBucks: 毎日の売り上げ計算アプリ
 必要に応じてレポートを出力します。
 
 # 6. 設定 (Configuration)
-.env ファイルで以下の設定を行います:
+.env ファイルで以下の設定を行います
+
 DB_CONNECTION: データベース接続設定（例: mysql）
 
 DB_HOST: データベースのホスト名
