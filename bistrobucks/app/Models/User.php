@@ -23,7 +23,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * 配列に対して非表示にする属性（hidden）を指定
      *
      * @var array<int, string>
      */
@@ -33,7 +33,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * キャストする属性を取得（キャスト：データ型を変換すること）
      *
      * @return array<string, string>
      */
@@ -43,5 +43,31 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    //　リレーションを定義
+    public function shops()// shopsテーブルとのリレーション
+    {
+        return $this->hasMany(Shop::class);
+    }
+
+    public function invoices()// invoicesテーブルとのリレーション
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function costs()// costsテーブルとのリレーション
+    {
+        return $this->hasMany(Cost::class);
+    }
+
+    public function breakEvenPoints()// break_even_pointsテーブルとのリレーション
+    {
+        return $this->hasMany(BreakEvenPoint::class);
+    }
+
+    public function reports()// reportsテーブルとのリレーション
+    {
+        return $this->hasMany(Report::class);
     }
 }
