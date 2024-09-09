@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('costs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
+            $table->decimal('water_cost', 10, 2)->nullable();
+            $table->decimal('gas_cost', 10, 2)->nullable();
+            $table->decimal('electric_cost', 10, 2)->nullable();
+            $table->decimal('labor_cost', 10, 2)->nullable();
+            $table->decimal('supply_cost', 10, 2);
             $table->timestamps();
         });
     }

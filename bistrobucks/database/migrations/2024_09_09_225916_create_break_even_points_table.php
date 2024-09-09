@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('break_even_points', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
+            $table->decimal('required_revenue', 10, 2);
+            $table->integer('required_customers');
             $table->timestamps();
         });
     }

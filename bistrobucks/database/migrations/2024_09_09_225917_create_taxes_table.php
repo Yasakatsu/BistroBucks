@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
+            $table->decimal('tax_rate', 5, 2);
+            $table->string('description');
+            $table->date('applied_on');
             $table->timestamps();
         });
     }
