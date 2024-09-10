@@ -2,6 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\BreakEvenPoint;
+use App\Models\Cost;
+use App\Models\Invoice;
+use App\Models\InvoiceItem;
+use App\Models\Report;
+use App\Models\Shop;
+use App\Models\Tax;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +20,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        //各モデル毎にファクトリーを呼び出す。リレーションはファクトリーで設定しているので、ここで呼び出すだけでリレーションが設定される。
+        User::factory(10)->create();
+        Shop::factory(10)->create();
+        Invoice::factory(10)->create();
+        Tax::factory(10)->create();
+        InvoiceItem::factory(10)->create();
+        Cost::factory(10)->create();
+        BreakEvenPoint::factory(10)->create();
+        Report::factory(10)->create();
     }
 }
