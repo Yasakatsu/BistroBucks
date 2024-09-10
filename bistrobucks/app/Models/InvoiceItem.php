@@ -20,4 +20,9 @@ class InvoiceItem extends Model
     {
         return $this->belongsTo(Tax::class);
     }
+    // 伝票詳細は1つの商品に属する
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
