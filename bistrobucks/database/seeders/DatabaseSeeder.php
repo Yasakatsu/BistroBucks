@@ -6,6 +6,7 @@ use App\Models\BreakEvenPoint;
 use App\Models\Cost;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+use App\Models\Product;
 use App\Models\Report;
 use App\Models\Shop;
 use App\Models\Tax;
@@ -29,5 +30,6 @@ class DatabaseSeeder extends Seeder
         Cost::factory(10)->create();
         BreakEvenPoint::factory(10)->create();
         Report::factory(10)->create();
+        Product::factory(10)->create();
     }
 }
