@@ -6,7 +6,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-require __DIR__ . '/auth.php';//認証関連のルーティング
 
 ////////////////////////
 //ログイン前のルーティング//
@@ -32,3 +31,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+require __DIR__ . '/auth.php'; //認証関連のルーティング
+require __DIR__ . '/test.php';//テスト用のルーティング
