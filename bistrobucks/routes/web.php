@@ -18,18 +18,17 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-////////////////////////
-//ログイン後のルーティング//
-///////////////////////
-//ダッシュボード
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-//プロフィール画面
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+//ログイン後のルーティング
+
+Route::get('/dashboard', function () { //ダッシュボード
+    return Inertia::render('Dashboard'); //inertia.jsのrenderメソッドを使い、スムーズなページ遷移を実現（reactのようなSPAを実現）
+})->middleware(['auth', 'verified'])->name('dashboard'); //middlewareメソッドで、authとverifiedミドルウェアを適用
+
+Route::middleware('auth')->group(function () { //auth（認証）ミドルウェアを適用したグループ
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit'); //プロフィール編集画面
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); //プロフィール更新
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); //プロフィール削除
 });
 
 require __DIR__ . '/auth.php'; //認証関連のルーティング
