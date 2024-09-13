@@ -8,20 +8,20 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // BreakEvenPointControllerのresourceを定義
-Route::resource('break-even-point', 'App\Http\Controllers\BreakEvenPointController');
+Route::resource('break-even-point', 'BreakEvenPointController');
 // CostControllerのresourceを定義
-Route::resource('cost', 'App\Http\Controllers\CostController');
+Route::resource('cost', 'CostController');
 // InvoiceControllerのresourceを定義
-Route::resource('invoice', 'App\Http\Controllers\InvoiceController');
+Route::resource('invoice', 'InvoiceController');
 // InvoiceItemControllerのresourceを定義
-Route::resource('invoice-item', 'App\Http\Controllers\InvoiceItemController');
+Route::resource('invoice-item', 'InvoiceItemController');
 // ProductControllerのresourceを定義
-Route::resource('product', 'App\Http\Controllers\ProductController');
+Route::resource('product', 'ProductController');
 // ReportControllerのresourceを定義
-Route::resource('report', 'App\Http\Controllers\ReportController');
+Route::resource('report', 'ReportController');
 // ShopControllerのresourceを定義
-Route::resource('shop', 'App\Http\Controllers\ShopController');
+Route::resource('shop', 'ShopController');
 // TaxControllerのresourceを定義
-Route::resource('tax', 'App\Http\Controllers\TaxController');
+Route::resource('tax', 'TaxController');
 // UserControllerのresourceを定義
-Route::resource('user', 'App\Http\Controllers\UserController');
+Route::resource('user', 'UserController');
