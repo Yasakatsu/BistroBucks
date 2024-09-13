@@ -13,6 +13,9 @@ class BreakEvenPointController extends Controller
     public function index()
     {
         //BreakEvenPointモデル情報を取得
+        $breakEvenPoints = BreakEvenPoint::all();
+        // 取得したデータを返却する
+        return $breakEvenPoints;
     }
 
     /**

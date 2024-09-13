@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,7 +12,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        //Userモデルから全てのユーザー情報を取得
+        $users = User::all();
+        // 取得したデータを返却する
+        return $users;
     }
 
     /**

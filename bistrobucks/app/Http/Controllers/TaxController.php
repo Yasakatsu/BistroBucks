@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tax;
 use Illuminate\Http\Request;
 
 class TaxController extends Controller
@@ -11,7 +12,10 @@ class TaxController extends Controller
      */
     public function index()
     {
-        //
+        //Taxモデルの全データを取得
+        $taxes = Tax::all();
+        //取得したデータをビューに渡す
+        return $taxes;
     }
 
     /**

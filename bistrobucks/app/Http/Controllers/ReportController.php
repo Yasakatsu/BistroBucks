@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Report;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -11,7 +12,10 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+        //　Reportモデルから全てのレポート情報を取得
+        $reports = Report::all();
+        // 取得したデータを返却する
+        return $reports;
     }
 
     /**

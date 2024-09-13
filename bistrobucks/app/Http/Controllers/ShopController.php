@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -11,7 +12,10 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        //　Shopモデル情報を取得
+        $shops = Shop::all();
+        // 取得したデータを返却する
+        return $shops;
     }
 
     /**

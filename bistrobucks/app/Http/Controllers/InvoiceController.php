@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -11,7 +12,10 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        // Invoiceモデル情報を取得
+        $invoices = Invoice::all();
+        // 取得したデータを返却する
+        return $invoices;
     }
 
     /**

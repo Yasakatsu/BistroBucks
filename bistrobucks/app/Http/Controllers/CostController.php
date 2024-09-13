@@ -13,6 +13,9 @@ class CostController extends Controller
     public function index()
     {
         //Costモデル情報を取得
+        $costs = Cost::all();
+        //取得したデータを返却する
+        return $costs;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
 
 class InvoiceItemController extends Controller
@@ -11,7 +12,11 @@ class InvoiceItemController extends Controller
      */
     public function index()
     {
-        //
+        // InvoiceItemモデルから全ての請求書アイテム情報を取得
+        $invoiceItems = InvoiceItem::all();
+        // 取得したデータを返却する
+        return $invoiceItems;
+
     }
 
     /**
