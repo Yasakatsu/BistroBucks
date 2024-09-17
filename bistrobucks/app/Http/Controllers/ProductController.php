@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -11,7 +12,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        //　Productモデル情報を取得
+        $products = Product::all();
+        // 取得したデータを返却する
+        return $products;
     }
 
     /**
@@ -27,7 +31,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //  リクエストデータを取得
+        $data = $request->all();
+        // データを保存
+        $product = Product::create($data);
+        // 保存したデータを返却
+        return $product;
     }
 
     /**
@@ -35,7 +44,10 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // 指定されたIDのデータを取得
+        $product = Product::find($id);
+        // 取得したデータを返却
+        return $product;
     }
 
     /**
@@ -43,7 +55,10 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // 指定されたIDのデータを取得
+        $product = Product::find($id);
+        // 取得したデータを返却
+        return $product;
     }
 
     /**
@@ -51,7 +66,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // リクエストデータを取得
+        $data = $request->all();
+        // 指定されたIDのデータを取得
+        $product = Product::find($id);
+        // データを更新
+        $product->update($data);
+        // 更新したデータを返却
+        return $product;
     }
 
     /**
@@ -59,6 +81,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-    }
+        // 指定されたIDのデータを取得
+        $product = Product::find($id);
+        // データを削除
+        $product->delete();
+        // 削除したデータを返却
+        return $product;}
 }
