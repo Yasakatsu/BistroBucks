@@ -25,5 +25,3 @@ Route::resource('daily-costs', DailyCostController::class);
 Route::resource('settings', SettingController::class);
 // ShopControllerのresourceを定義
 Route::resource('shops', ShopController::class);
-// 
-
