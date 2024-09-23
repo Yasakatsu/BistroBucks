@@ -32,4 +32,3 @@ Route::middleware('auth')->group(function () { //auth（認証）ミドルウェ
 });
 
 require __DIR__ . '/auth.php'; //認証関連のルーティング
-require __DIR__ . '/test.php';//テスト用のルーティング
