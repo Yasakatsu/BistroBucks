@@ -14,17 +14,20 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// UserControllerのresourceを定義
-Route::resource('users', UserController::class);
-// ProductControllerのresourceを定義
-Route::resource('products', ProductController::class);
-// SaleControllerのresourceを定義
-Route::resource('sales', SaleController::class);
-// SalesDetailControllerのresourceを定義
-Route::resource('sales-details', SalesDetailController::class);
-// DailyCostControllerのresourceを定義
-Route::resource('daily-costs', DailyCostController::class);
-// SettingControllerのresourceを定義
-Route::resource('settings', SettingController::class);
-// ShopControllerのresourceを定義
-Route::resource('shops', ShopController::class);
+
+Route::middleware('auth')->group(function () {
+    // UserControllerのresourceを定義
+    Route::resource('users', UserController::class);
+    // ProductControllerのresourceを定義
+    Route::resource('products', ProductController::class);
+    // SaleControllerのresourceを定義
+    Route::resource('sales', SaleController::class);
+    // SalesDetailControllerのresourceを定義
+    Route::resource('sales-details', SalesDetailController::class);
+    // DailyCostControllerのresourceを定義
+    Route::resource('daily-costs', DailyCostController::class);
+    // SettingControllerのresourceを定義
+    Route::resource('settings', SettingController::class);
+    // ShopControllerのresourceを定義
+    Route::resource('shops', [ShopController::class]);
+});
