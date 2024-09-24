@@ -29,5 +29,5 @@ Route::middleware('auth')->group(function () {
     // SettingControllerのresourceを定義
     Route::resource('settings', SettingController::class);
     // ShopControllerのresourceを定義
-    Route::resource('shops', [ShopController::class]);
+    Route::resource('shops', ShopController::class);
 });
