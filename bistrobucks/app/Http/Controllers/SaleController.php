@@ -79,6 +79,9 @@ class SaleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $sale = Sale::findOrFail($id);
+        $sale->delete();
+
+        return response()->json(['message' => '売上情報の削除が完了しました']);
     }
 }
