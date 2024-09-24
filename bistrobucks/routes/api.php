@@ -6,6 +6,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SalesDetailController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// UserControllerのresourceを定義
+Route::resource('users', UserController::class);
 // ProductControllerのresourceを定義
 Route::resource('products', ProductController::class);
 // SaleControllerのresourceを定義
