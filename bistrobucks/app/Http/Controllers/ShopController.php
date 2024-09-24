@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -27,7 +28,14 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+        ]);
+
+        Shop::create($validated);
+
+        return response()->json(['message' => '店舗情報の作成が成功しました']);
     }
 
     /**
@@ -51,7 +59,15 @@ class ShopController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+        ]);
+
+        $shop = Shop::findOrFail($id);
+        $shop->update($validated);
+
+        return response()->json(['message' => '店舗情報の更新が成功しました', 'shop' => $shop]);
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DailyCostRequest;
 use App\Models\DailyCost;
 use Illuminate\Http\Request;
 
@@ -11,13 +10,7 @@ class DailyCostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //DailyCostModelの全データを取得
-        $dailyCosts = DailyCost::all();
-        //取得したデータを返却する  
-        return $dailyCosts;
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
@@ -30,20 +23,18 @@ class DailyCostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DailyCostRequest $request)
+    public function store(Request $request)
     {
-        // 新規のDailyCostModelインスタンスを作成
-        $dailyCost = new DailyCost();
+        $validated = $request->validate([
+            'shop_id' => 'required|exists:shops,id',
+            'amount' => 'required|numeric|min:0',
+            'is_fixed' => 'required|boolean',
+        ]);
 
-        // カラムの内容を$dailyCostに設定
-        $dailyCost->shop_id = $request->get('shop_id');
-        $dailyCost->cost_type = $request->get('cost_type');
-        $dailyCost->amount = $request->get('amount');
-        $dailyCost->is_fixed = $request->get('is_fixed');
-        $dailyCost->date = $request->get('date');
+        $validated['shop_id'] = auth()->user()->shop_id;
+        DailyCost::create($validated);
 
-        // データベースにデータを保存する
-        $dailyCost->save();
+        return response()->json(['message' => 'コスト情報の作成が成功しました']);
     }
 
     /**
@@ -67,7 +58,17 @@ class DailyCostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $cost = DailyCost::where('id', $id)->where('shop_id', auth()->user()->shop_id)->firstOrFail();
+
+        $validated = $request->validate([
+            'shop_id' => 'required|exists:shops,id',
+            'amount' => 'required|numeric|min:0',
+            'is_fixed' => 'required|boolean',
+        ]);
+
+        $cost->update($validated);
+
+        return response()->json(['message' => 'コスト情報の更新が成功しました', 'cost' => $cost]);
     }
 
     /**

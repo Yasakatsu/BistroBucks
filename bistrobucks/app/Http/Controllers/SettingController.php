@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -51,7 +52,16 @@ class SettingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'shop_id' => 'required|exists:shops,id',
+            'standard_tax_rate' => 'required|numeric|min:0',
+            'reduced_tax_rate' => 'required|numeric|min:0',
+        ]);
+
+        $settings = Setting::where('shop_id', auth()->user()->shop_id)->firstOrFail();
+        $settings->update($validated);
+
+        return response()->json(['message' => 'Settings updated successfully', 'settings' => $settings]);
     }
 
     /**

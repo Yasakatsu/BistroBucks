@@ -31,9 +31,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'icon' => 'nullable|string|max:255',
+        ]);
 
+        User::create($validated);
+
+        return response()->json(['message' => 'user情報の作成が成功しました']);
+    }
     /**
      * Display the specified resource.
      */
@@ -55,7 +63,17 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8',
+            'icon' => 'nullable|string|max:255',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update($validated);
+
+        return response()->json(['message' => 'ユーザー情報の更新が成功しました', 'user' => $user]);
     }
 
     /**

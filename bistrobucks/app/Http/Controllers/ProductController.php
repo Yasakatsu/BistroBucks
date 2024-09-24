@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -27,7 +28,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'unit_price' => 'required|numeric|min:0',
+        ]);
+
+        Product::create($validated);
+
+        return response()->json(['message' => 'メニュー情報の作成が成功しました']);
     }
 
     /**
@@ -51,8 +59,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'unit_price' => 'required|numeric|min:0',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->update($validated);
+
+        return response()->json(['message' => 'メニュー情報の更新が完了しました', 'product' => $product]);
     }
+
 
     /**
      * Remove the specified resource from storage.
