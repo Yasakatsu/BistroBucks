@@ -35,7 +35,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
-            'icon' => 'nullable|string|max:255',
+            'icon' => 'nullable|file|mimes:jpg,png,jpeg|max:2048',
         ]);
 
         User::create($validated);
