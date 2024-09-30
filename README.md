@@ -43,7 +43,6 @@ Headless UI      | UIコンポーネントライブラリ(TailWindCSSとの互�
 | AWS RDS            | マネージドMySQLデータベースサービス       |
 | GitHub Actions     | 自動テストとデプロイのためのCI/CD          |
 
-   ```
 
 ## 今後の計画
 - **決済の統合:** StripeやPayPalなどの決済ゲートウェイを導入し、サブスクリプション管理を行います。
