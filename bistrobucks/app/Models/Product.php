@@ -9,4 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use HasFactory, SoftDeletes; // ファクトリーを使う、ソフトデリートを使う
+
+    protected $fillable = [
+        'shop_id',
+        'name',
+        'category',
+        'unit_price',
+        'start_date',
+        'end_date',
+        'image_path',
+        'description',
+        'version',
+    ];
 }
