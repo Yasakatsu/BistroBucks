@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,7 +11,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() // 商品一覧を表示
     {
         //
     }
@@ -18,15 +19,15 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() // 商品を新規登録するフォームを表示
     {
         //
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, ProductService $productService) // 商品を新規登録
     {
-        $validated = $request->validate([
+        $validated = $request->validate([ // バリデーション
             'shop_id' => 'required|exists:shops,id',
             'name' => 'required|string',
             'category' => 'nullable|string',
@@ -37,32 +38,8 @@ class ProductController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        // 同じ名前の商品が存在する場合、バージョンをインクリメント
-        $latestProduct = Product::where('name', $validated['name']) // 商品名が一致(同じ商品のみ)
-            ->where('shop_id', $validated['shop_id']) // 店舗IDが一致(同じ店舗の商品のみ)
-            ->orderBy('version', 'desc') // バージョンの降順(新しい順)
-            ->first(); // 一番新しい商品を取得(存在しない場合はnull)
-
-        // 新しいバージョンの商品を作成するためのバージョン番号を取得し、変数$versionに代入
-        $version = $latestProduct ? $latestProduct->version + 1 : 1; // バージョンが存在する場合はインクリメント、存在しない場合は[1]
-
-        // 古いバージョンの商品を非アクティブにする
-        if ($latestProduct) { // バージョンが存在する場合
-            $latestProduct->update(['end_date' => now()]); // 現在日時で販売終了日を更新(非アクティブ化)
-        }
-
-        // 新しいバージョンの商品を作成
-        $product = Product::create([
-            'shop_id' => $validated['shop_id'],
-            'name' => $validated['name'],
-            'category' => $validated['category'],
-            'unit_price' => $validated['unit_price'],
-            'start_date' => $validated['start_date'],
-            'end_date' => $validated['end_date'],
-            'image_path' => $validated['image_path'],
-            'description' => $validated['description'],
-            'version' => $version,
-        ]);
+        $version = $productService->handleProductVersioning($validated); // 商品のバージョニングを処理
+        $product = $productService->createProduct($validated, $version); // 商品を作成
 
         return response()->json(['message' => '商品が登録されました', 'product' => $product]);
     }
@@ -70,7 +47,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id) // 商品の詳細を表示
     {
         //
     }
@@ -78,7 +55,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id) // 商品情報を編集するフォームを表示
     {
         //
     }
@@ -86,7 +63,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) // 商品情報を更新
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -107,7 +84,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) // 商品を削除
     {
         //
     }
