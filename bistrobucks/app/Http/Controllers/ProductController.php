@@ -12,9 +12,7 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     public function index() // 商品一覧を表示
-    {
-        //
-    }
+    {}
 
     /**
      * Show the form for creating a new resource.
