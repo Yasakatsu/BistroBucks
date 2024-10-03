@@ -9,6 +9,14 @@ class Shop extends Model
 {
     use HasFactory;
 
+    // 許可するカラムを定義
+    protected $fillable =
+    [
+        'name',
+        'location',
+        'user_id',
+    ];
+
     // リレーションを定義
     public function user()
     {
@@ -30,12 +38,4 @@ class Shop extends Model
     {
         return $this->hasMany(Sale::class);  // 1対多のリレーション
     }
-
-    // 許可するカラムを定義
-    protected $fillable =
-    [
-        'name',
-        'location',
-        'user_id',
-    ];
 }

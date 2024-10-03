@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () { //auth（認証）ミドルウェ
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit'); //プロフィール編集画面
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); //プロフィール更新
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); //プロフィール削除    // testファイルを表示するためのルーティング(reactを使用したview画面を表示するテスト用のメソッド)
-    Route::get('/sale', function () {
-        return Inertia::render('Sale');
-    })->name('sale');
 });
+
+
+
 require __DIR__ . '/auth.php'; //認証関連のルーティング

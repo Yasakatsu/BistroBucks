@@ -21,4 +21,8 @@ class Product extends Model
         'description',
         'version',
     ];
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
 }
