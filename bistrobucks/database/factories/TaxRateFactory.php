@@ -17,10 +17,13 @@ class TaxRateFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->randomElement(['通常税率', '軽減税率']);
+        $rate = $name === '通常税率' ? 10.0 : 8.0;
+
         return [
             'shop_id' => Shop::factory(),
-            'name' => $this->faker->randomElement(['通常税率', '軽減税率']),
-            'rate' => $this->faker->randomFloat(2, 0, 1),
+            'name' => $name,
+            'rate' => $rate,
             'is_default' => $this->faker->boolean,
         ];
     }
