@@ -21,8 +21,13 @@ class Product extends Model
         'description',
         'version',
     ];
+
     public function shop()
     {
         return $this->belongsTo(Shop::class);
+    }
+    public function saleDetail()
+    {
+        return $this->hasMany(SaleDetail::class);
     }
 }

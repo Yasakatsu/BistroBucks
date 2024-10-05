@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sales_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sale_id');  // 外部キー
-            $table->unsignedBigInteger('product_name_id');  // 外部キー
+            $table->unsignedBigInteger('product_id');  // 外部キー
             $table->integer('quantity');  // 数量(必須, 例: 1/ 2/ 3)
             $table->decimal('item_price', 8, 2);  // 税込販売単価
             $table->decimal('item_price_excluding_tax', 8, 2)->nullable();  // 税別販売単価
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
             // 外部キー制約
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
-            $table->foreign('product_name_id')->references('id')->on('product_names')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
