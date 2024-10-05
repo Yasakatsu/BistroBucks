@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Shop;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class SettingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'shop_id' => Shop::factory(),
+            'standard_tax_rate' => $this->faker->randomFloat(2, 0, 1000),
+            'reduced_tax_rate' => $this->faker->randomFloat(2, 0, 1000),
         ];
     }
 }

@@ -38,4 +38,9 @@ class Shop extends Model
     {
         return $this->hasMany(Sale::class);  // 1対多のリレーション
     }
+    public function taxRates()
+    {
+        return $this->hasMany(TaxRate::class);  // 1対多のリレーション
+    }
+    
 }

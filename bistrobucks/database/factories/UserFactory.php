@@ -23,8 +23,6 @@ class UserFactory extends Factory
             'password' => 'password',
             'remember_token' => null,
             'icon' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }

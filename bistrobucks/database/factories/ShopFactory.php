@@ -18,13 +18,9 @@ class ShopFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory(), // 外部キー
             'name' => $this->faker->streetName . '店',
             'location' => $this->faker->address,
-            'user_id' => User::factory(), // 外部キー
-            'created_at' => now(),
-            'updated_at' => now(),
-
-
         ];
     }
 }
