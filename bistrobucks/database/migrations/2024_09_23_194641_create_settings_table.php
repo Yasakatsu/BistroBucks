@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('shop_id');  // 外部キー
-            $table->decimal('standard_tax_rate', 5, 2);  // 店内飲食の標準税率
-            $table->decimal('reduced_tax_rate', 5, 2);  // テイクアウトの軽減税率
+            $table->unsignedBigInteger('tax_rate_id');  // 外部キー
             $table->timestamps();
 
             // 外部キー制約
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+            $table->foreign('tax_rate_id')->references('id')->on('tax_rates')->onDelete('cascade');
         });
     }
 
