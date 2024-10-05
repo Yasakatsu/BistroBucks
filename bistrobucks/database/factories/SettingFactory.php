@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Shop;
+use App\Models\TaxRate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,8 +20,7 @@ class SettingFactory extends Factory
     {
         return [
             'shop_id' => Shop::factory(),
-            'standard_tax_rate' => $this->faker->randomFloat(2, 0, 1000),
-            'reduced_tax_rate' => $this->faker->randomFloat(2, 0, 1000),
+            'tax_rate_id' => TaxRate::factory(),
         ];
     }
 }

@@ -19,8 +19,8 @@ class DailyCostFactory extends Factory
     {
         return [
             'shop_id' => Shop::factory(),
-            'cost_type' => $this->faker->word,
-            'amount' => $this->faker->randomFloat(2, 0, 100),
+            'cost_name' => $this->faker->word,
+            'cost_amount' => $this->faker->numberBetween(1, 1000),
             'is_fixed' => $this->faker->boolean,
             'date' => $this->faker->date(),
         ];
