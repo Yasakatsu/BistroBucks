@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('daily_costs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('shop_id');  // 外部キー
-            $table->string('cost_type');  // コストの種類
-            $table->decimal('amount', 8, 2);  // コスト金額
-            $table->boolean('is_fixed')->default(false);  // 固定費かどうか
+            $table->string('cost_name');  // コスト名
+            $table->decimal('cost_amount', 8, 2);  // コスト金額
+            $table->boolean('is_fixed')->default(false);  // 固定費かどうか（初期値は変動費）
             $table->date('date');  // 発生日
             $table->timestamps();
 
