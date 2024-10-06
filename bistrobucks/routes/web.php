@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\TestController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +30,8 @@ Route::middleware('auth')->group(function () { //auth（認証）ミドルウェ
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); //プロフィール更新
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); //プロフィール削除    // testファイルを表示するためのルーティング(reactを使用したview画面を表示するテスト用のメソッド)
 });
+
+Route::get('sale/dashboard', [SaleController::class, 'index'])->name('sale.dashboard'); //売上ダッシュボード
 
 
 
