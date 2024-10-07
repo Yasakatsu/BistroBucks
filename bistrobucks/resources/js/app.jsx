@@ -19,6 +19,7 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
+            // chakraUIを使うためにChakraProviderでラップ
             <ChakraProvider>
                 <App {...props} />
             </ChakraProvider>
