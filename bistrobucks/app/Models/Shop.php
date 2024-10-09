@@ -9,33 +9,38 @@ class Shop extends Model
 {
     use HasFactory;
 
-    // 店舗は1人のユーザーに属する
+    // 許可するカラムを定義
+    protected $fillable =
+    [
+        'name',
+        'location',
+        'user_id',
+    ];
+
+    // リレーションを定義
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);  // ユーザーに属する
     }
-
-    // 店舗は複数の伝票を持つ
-    public function invoices()
+    public function products()
     {
-        return $this->hasMany(Invoice::class);
+        return $this->hasMany(Product::class);  // 1対多のリレーション
     }
-
-    // 店舗は複数のコストを持つ
-    public function costs()
+    public function setting()
     {
-        return $this->hasMany(Cost::class);
+        return $this->hasOne(Setting::class);  // 1対1のリレーション
     }
-
-    // 店舗は複数の損益分岐点を持つ
-    public function breakEvenPoints()
+    public function dailyCosts()
     {
-        return $this->hasMany(BreakEvenPoint::class);
+        return $this->hasMany(DailyCost::class);  // 1対多のリレーション
     }
-
-    // 店舗は複数のレポートを持つ
-    public function reports()
+    public function sales()
     {
-        return $this->hasMany(Report::class);
+        return $this->hasMany(Sale::class);  // 1対多のリレーション
     }
+    public function taxRates()
+    {
+        return $this->hasMany(TaxRate::class);  // 1対多のリレーション
+    }
+    
 }

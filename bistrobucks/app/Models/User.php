@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'icon',
     ];
 
     /**
@@ -46,28 +47,8 @@ class User extends Authenticatable
     }
 
     //　リレーションを定義
-    public function shops()// shopsテーブルとのリレーション
+    public function shops() // shopsテーブルとのリレーション
     {
-        return $this->hasMany(Shop::class);
-    }
-
-    public function invoices()// invoicesテーブルとのリレーション
-    {
-        return $this->hasMany(Invoice::class);
-    }
-
-    public function costs()// costsテーブルとのリレーション
-    {
-        return $this->hasMany(Cost::class);
-    }
-
-    public function breakEvenPoints()// break_even_pointsテーブルとのリレーション
-    {
-        return $this->hasMany(BreakEvenPoint::class);
-    }
-
-    public function reports()// reportsテーブルとのリレーション
-    {
-        return $this->hasMany(Report::class);
+        return $this->hasMany(Shop::class); //1(User)対多(Shop)の関係
     }
 }

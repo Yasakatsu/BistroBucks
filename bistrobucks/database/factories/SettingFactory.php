@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Shop;
+use App\Models\TaxRate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Shop>
  */
-class ShopFactory extends Factory
+class SettingFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +19,8 @@ class ShopFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(), // 外部キー
-            'name' => $this->faker->streetName . '店',
-            'location' => $this->faker->address,
+            'shop_id' => Shop::factory(),
+            'tax_rate_id' => TaxRate::factory(),
         ];
     }
 }

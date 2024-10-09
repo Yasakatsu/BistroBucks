@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,8 +28,11 @@ Route::get('/dashboard', function () { //ダッシュボード
 Route::middleware('auth')->group(function () { //auth（認証）ミドルウェアを適用したグループ
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit'); //プロフィール編集画面
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); //プロフィール更新
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); //プロフィール削除
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); //プロフィール削除    // testファイルを表示するためのルーティング(reactを使用したview画面を表示するテスト用のメソッド)
 });
 
+Route::get('sale/dashboard', [SaleController::class, 'index'])->name('sale.dashboard'); //売上ダッシュボード
+
+
+
 require __DIR__ . '/auth.php'; //認証関連のルーティング
-require __DIR__ . '/test.php';//テスト用のルーティング

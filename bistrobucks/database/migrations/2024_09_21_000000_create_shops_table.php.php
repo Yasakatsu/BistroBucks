@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
-            $table->string('invoice_number');
-            $table->decimal('total_amount', 10, 2);
+            $table->unsignedBigInteger('user_id');  // 外部キー
+            $table->string('name');
+            $table->string('location')->nullable();  // 店舗所在地
             $table->timestamps();
+
+            // 外部キー制約
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('shops');
     }
 };
