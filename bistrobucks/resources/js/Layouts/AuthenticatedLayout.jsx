@@ -1,57 +1,62 @@
 import { useState } from 'react';
+import { Box, Flex,  Button, Text, VStack, HStack, Divider } from '@chakra-ui/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
-export default function Authenticated({ user, header, children }) {
+export default function Authenticated({ user, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex">
-                            <div className="shrink-0 flex items-center">
+        <Box bgColor="gray.100">
+            <Box as="nav">
+                <Box maxW="7xl" mx="auto" px={{ base: 4, sm: 6, lg: 8 }}>
+                    <Flex justify="space-between" h="16">
+                        <Flex>
+                            <Flex shrink={0} align="center">
+                                
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo   />
                                 </Link>
-                            </div>
+                            </Flex>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <HStack spacing={8} display={{ base: 'none', sm: 'flex' }} ml={10}>
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink>
-                            </div>
-                        </div>
+                            </HStack>
+                        </Flex>
 
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
-                            <div className="ms-3 relative">
+                        <HStack display={{ base: 'none', sm: 'flex' }} align="center" ml={6}>
+                            <Box ml={3} position="relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {user.name}
-
-                                                <svg
-                                                    className="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
+                                        <Button
+                                            type="button"
+                                            px={3}
+                                            py={2}
+                                            border="1px"
+                                            borderColor="transparent"
+                                            fontSize="sm"
+                                            fontWeight="medium"
+                                            rounded="md"
+                                            color="gray.500"
+                                            bg="white"
+                                            _hover={{ color: 'gray.700' }}
+                                            _focus={{ outline: 'none', bg: 'gray.100', color: 'gray.500' }}
+                                            transition="ease-in-out duration-150"
+                                        >
+                                            {user.name}
+                                            <Box as="svg" ml={2} mr={-0.5} h={4} w={4} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clipRule="evenodd"
+                                                />
+                                            </Box>
+                                        </Button>
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
@@ -61,15 +66,20 @@ export default function Authenticated({ user, header, children }) {
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
-                            </div>
-                        </div>
+                            </Box>
+                        </HStack>
 
-                        <div className="-me-2 flex items-center sm:hidden">
-                            <button
+                        <Flex display={{ base: 'flex', sm: 'none' }} align="center" ml={-2}>
+                            <Button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                p={2}
+                                rounded="md"
+                                color="gray.400"
+                                _hover={{ color: 'gray.500', bg: 'gray.100' }}
+                                _focus={{ outline: 'none', bg: 'gray.100', color: 'gray.500' }}
+                                transition="duration-150 ease-in-out"
                             >
-                                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                <Box as="svg" h={6} w={6} stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
                                         className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
                                         strokeLinecap="round"
@@ -84,42 +94,38 @@ export default function Authenticated({ user, header, children }) {
                                         strokeWidth="2"
                                         d="M6 18L18 6M6 6l12 12"
                                     />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                                </Box>
+                            </Button>
+                        </Flex>
+                    </Flex>
+                </Box>
 
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
+                <Box display={showingNavigationDropdown ? 'block' : 'none'} sm={{ display: 'none' }}>
+                    <VStack pt={2} pb={3} spacing={1}>
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
-                    </div>
+                    </VStack>
 
-                    <div className="pt-4 pb-1 border-t border-gray-200">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800">{user.name}</div>
-                            <div className="font-medium text-sm text-gray-500">{user.email}</div>
-                        </div>
+                    <Divider borderColor="gray.200" />
 
-                        <div className="mt-3 space-y-1">
+                    <Box pt={4} pb={1}>
+                        <Box px={4}>
+                            <Text fontSize="base" fontWeight="medium" color="gray.800">{user.name}</Text>
+                            <Text fontSize="sm" fontWeight="medium" color="gray.500">{user.email}</Text>
+                        </Box>
+
+                        <VStack mt={3} spacing={1}>
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+                        </VStack>
+                    </Box>
+                </Box>
+            </Box>
 
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
-
-            <main>{children}</main>
-        </div>
+            <Box as="main">{children}</Box>
+        </Box>
     );
 }

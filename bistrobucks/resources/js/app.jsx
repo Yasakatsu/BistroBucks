@@ -5,8 +5,19 @@ import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ChakraProvider } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+const theme = extendTheme({
+    colors: {
+        navy: {
+            800: "#1a365d",
+        },
+        gray: {
+            600: "#718096",
+        },
+    },
+});
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -20,7 +31,7 @@ createInertiaApp({
 
         root.render(
             // chakraUIを使うためにChakraProviderでラップ
-            <ChakraProvider>
+            <ChakraProvider theme={theme}>
                 <App {...props} />
             </ChakraProvider>
         );
