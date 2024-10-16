@@ -11,16 +11,8 @@ class SaleController extends Controller
     public function index()
     {
         $sales = Sale::with('saleDetails')->get();
-        // dd($sales); // ここでデータを取得しているか確認
-        $saleDetails = SaleDetail::with('product', 'sale')
-            ->orderBy('id', 'desc')
-            ->take(5)
-            ->get();
-        // dd($saleDetails); // ここでデータを取得しているか確認
+        $saleDetails = SaleDetail::with('product', 'sale')->orderBy('id', 'desc')->get();
 
-        return Inertia::render(
-            'Sale/Dashboard',
-            ['sales' => $sales, 'saleDetails' => $saleDetails,]
-        );
+        return Inertia::render('Sales', ['sales' => $sales, 'saleDetails' => $saleDetails,]);
     }
 }
