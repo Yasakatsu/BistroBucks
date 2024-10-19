@@ -4,7 +4,7 @@ import { Link } from "@inertiajs/react";
 export default function ApplicationLogo(props) {
     return (
         <Box>
-            <Link href="/sale/dashboard">
+            <Link href="/dashboard">
                 <Box as="a">
                     <Image
                         src="/img/bbIcon.png"

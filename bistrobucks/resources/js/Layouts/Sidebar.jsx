@@ -1,110 +1,118 @@
 import React from "react";
-import { Box, Stack, Flex } from "@chakra-ui/react";
-import { Link } from "@inertiajs/react";
-import ApplicationLogo from "@/Components/ApplicationLogo";
+import { Stack, Flex, Button } from "@chakra-ui/react";
 
 const Sidebar = () => {
     return (
         <>
             <Flex
-                mt={1}
-                height="91.5vh" // 画面全体の高さを確実にカバー
+                h={{ base: "90vh", md: "90vh" }}
+                w={{
+                    base: "100%",
+                    md: "90%",
+                    lg: "70%",
+                    xl: "50%",
+                    "2xl": "35%",
+                }}
                 bgGradient="linear(to-b,blue.100,blue.400,red.300)"
                 justifyContent="center" // 縦方向の中央揃え
                 alignItems="center" // 横方向の中央揃え
+                borderRadius={{ base: "3xl", md: "none" }}
             >
-                <Stack spacing={20} p={4} w="100%">
-                    {" "}
-                    {/* スペーシング調整 */}
-                    <Link href="/">
-                        <Box
-                            textAlign={"center"}
-                            p={3}
-                            color="white"
-                            fontWeight="bold"
-                            borderRadius="md"
-                            boxShadow="dark-lg"
-                            bgGradient="linear(to-r, blue.400,red.300)"
-                            _hover={{
-                                bgGradient: "linear(to-r, blue.300,red.200)",
-                            }}
-                            w="100%"
-                        >
-                            SALE
-                        </Box>
-                    </Link>
-                    <Link href="/">
-                        <Box
-                            textAlign={"center"}
-                            p={3}
-                            color="white"
-                            fontWeight="bold"
-                            borderRadius="md"
-                            boxShadow="dark-lg"
-                            bgGradient="linear(to-r, blue.400,red.300)"
-                            _hover={{
-                                bgGradient: "linear(to-r, blue.300,red.200)",
-                                boxShadow: "",
-                            }}
-                            w="100%"
-                        >
-                            COST
-                        </Box>
-                    </Link>
-                    <Link href="/">
-                        <Box
-                            textAlign={"center"}
-                            p={3}
-                            color="white"
-                            fontWeight="bold"
-                            borderRadius="md"
-                            boxShadow="dark-lg"
-                            bgGradient="linear(to-r, blue.400,red.300)"
-                            _hover={{
-                                bgGradient: "linear(to-r, blue.300,red.200)",
-                                boxShadow: "",
-                            }}
-                            w="100%"
-                        >
-                            MENU
-                        </Box>
-                    </Link>
-                    <Link href="/">
-                        <Box
-                            textAlign={"center"}
-                            p={3}
-                            color="white"
-                            fontWeight="bold"
-                            borderRadius="md"
-                            boxShadow="dark-lg"
-                            bgGradient="linear(to-r, blue.400,red.300)"
-                            _hover={{
-                                bgGradient: "linear(to-r, blue.300,red.200)",
-                                boxShadow: "",
-                            }}
-                            w="100%"
-                        >
-                            SETTING
-                        </Box>
-                    </Link>
-                    <Link href="/">
-                        <Box
-                            textAlign={"center"}
-                            p={3}
-                            color="white"
-                            fontWeight="bold"
-                            borderRadius="md"
-                            boxShadow="dark-lg"
-                            bgGradient="linear(to-r, blue.400,red.300)"
-                            _hover={{
-                                bgGradient: "linear(to-r, blue.300,red.200)",
-                                boxShadow: "",
-                            }}
-                            w="100%"
-                        >
-                            REPORT
-                        </Box>
-                    </Link>
+                <Stack
+                    spacing={20}
+                    p={4}
+                    w="100%"
+                    h="100%"
+                    justifyContent={"center"}
+                >
+                    <Button
+                        as="a"
+                        href="/"
+                        textAlign={"center"}
+                        p={3}
+                        color="white"
+                        fontWeight="bold"
+                        borderRadius="md"
+                        boxShadow="dark-lg"
+                        bgGradient="linear(to-r, blue.400,red.300)"
+                        _hover={{
+                            bgGradient: "linear(to-r, blue.300,red.200)",
+                        }}
+                        w="100%"
+                    >
+                        SALE
+                    </Button>
+                    <Button
+                        as="a"
+                        href="/"
+                        textAlign={"center"}
+                        p={3}
+                        color="white"
+                        fontWeight="bold"
+                        borderRadius="md"
+                        boxShadow="dark-lg"
+                        bgGradient="linear(to-r, blue.400,red.300)"
+                        _hover={{
+                            bgGradient: "linear(to-r, blue.300,red.200)",
+                        }}
+                        w="100%"
+                    >
+                        COST
+                    </Button>
+                    <Button
+                        as="a"
+                        href="/"
+                        textAlign={"center"}
+                        p={3}
+                        color="white"
+                        fontWeight="bold"
+                        borderRadius="md"
+                        boxShadow="dark-lg"
+                        bgGradient="linear(to-r, blue.400,red.300)"
+                        _hover={{
+                            bgGradient: "linear(to-r, blue.300,red.200)",
+                            boxShadow: "",
+                        }}
+                        w="100%"
+                    >
+                        MENU
+                    </Button>
+                    <Button
+                        as="a"
+                        href="/"
+                        textAlign={"center"}
+                        p={3}
+                        color="white"
+                        fontWeight="bold"
+                        borderRadius="md"
+                        boxShadow="dark-lg"
+                        bgGradient="linear(to-r, blue.400,red.300)"
+                        _hover={{
+                            bgGradient: "linear(to-r, blue.300,red.200)",
+                            boxShadow: "",
+                        }}
+                        w="100%"
+                    >
+                        REPORT
+                    </Button>
+                    <Button
+                        as="a"
+                        href="/"
+                        textAlign={"center"}
+                        p={3}
+                        color="white"
+                        fontWeight="bold"
+                        borderRadius="md"
+                        boxShadow="dark-lg"
+                        bgGradient="linear(to-r, blue.400,red.300)"
+                        _hover={{
+                            bgGradient: "linear(to-r, blue.300,red.200)",
+                            boxShadow: "",
+                        }}
+                        w="100%"
+                    >
+                        SETTING
+                    </Button>
                 </Stack>
             </Flex>
         </>

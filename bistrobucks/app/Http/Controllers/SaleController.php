@@ -13,6 +13,6 @@ class SaleController extends Controller
         $sales = Sale::with('saleDetails')->get();
         $saleDetails = SaleDetail::with('product', 'sale')->orderBy('id', 'desc')->get();
 
-        return Inertia::render('Sales', ['sales' => $sales, 'saleDetails' => $saleDetails,]);
+        return Inertia::render('Sale', ['sales' => $sales, 'saleDetails' => $saleDetails,]);
     }
 }

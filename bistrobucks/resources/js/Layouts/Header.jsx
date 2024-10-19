@@ -5,7 +5,7 @@ import React from "react";
 const Header = () => {
     return (
         <>
-            <Box bg="gray.100" h={"8vh"}>
+            <Box bg="gray.100" h={"10vh"}>
                 <HStack
                     justifyContent={"space-between"}
                     alignItems={"center"}
@@ -14,7 +14,6 @@ const Header = () => {
                     <Box ml={8} h="100%" display="flex" alignItems="center">
                         <ApplicationLogo />
                     </Box>
-                    <Box></Box>
                     <Box mr={4}>My Profile</Box>
                 </HStack>
             </Box>
