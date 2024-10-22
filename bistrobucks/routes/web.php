@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
-use App\Models\User;
+use App\Models\Shop;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,12 +23,17 @@ Route::get('/', function () {
 //ログイン後のルーティング
 
 Route::get('/dashboard', function () { // ダッシュボード
+    $user = auth()->user(); // ログインユーザーを取得
+    $shopName = Shop::join('settings', 'shops.id', '=', 'settings.shop_id')// shopsテーブルとsettingsテーブルを結合
+        ->where('shops.id', $user->shop_id)// ログインユーザーの店舗ID
+        ->value('shops.name'); // shopsテーブルから取得    
     return Inertia::render(
         'Dashboard',
         [
             'title' => 'Dashboard',
             'metaDescription' => 'BistroBucksは、飲食店の利益管理を簡単にするためのアプリです。売上、コスト、利益率をリアルタイムで追跡し、店舗経営を効率化します。誰でも簡単に使える直感的なデザインで、経営の見える化を実現します。',
-            'userName' => auth()->user()->name, // ログインユーザーの名前を渡す
+            'userName' => $user->name, // ログインユーザーの名前
+            'shopName' => $shopName, // ログインユーザーの店舗名
         ]
     ); // inertia.jsのrenderメソッドを使い、スムーズなページ遷移を実現
 })->middleware(['auth', 'verified'])->name('dashboard');

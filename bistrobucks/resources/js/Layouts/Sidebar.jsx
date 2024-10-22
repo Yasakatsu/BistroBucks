@@ -11,7 +11,6 @@ const Sidebar = () => {
                     md: "90%",
                     lg: "70%",
                     xl: "50%",
-                    "2xl": "35%",
                 }}
                 bgGradient="linear(to-b,blue.100,blue.400,red.300)"
                 justifyContent="center" // 縦方向の中央揃え

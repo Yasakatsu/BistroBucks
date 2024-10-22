@@ -13,6 +13,10 @@ import {
     Button,
     Text,
     VStack,
+    Card,
+    CardHeader,
+    CardBody,
+    Avatar,
 } from "@chakra-ui/react";
 import { Head, Link } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
@@ -20,7 +24,7 @@ import { FaUserLarge } from "react-icons/fa6";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 
 export default function Dashboard(props) {
-    const { title, metaDescription, userName } = props; // プロップスから値を取得
+    const { title, metaDescription, userName, shopName } = props; // プロップスから値を取得
     const [showSidebar, setShowSidebar] = useState(false); // サイドバーの表示状態
 
     // サイドバーの表示切り替え
@@ -92,7 +96,15 @@ export default function Dashboard(props) {
                             boxShadow={"outline"}
                             bgColor={"white"}
                         >
-                            <Box>
+                            <Box display={{ base: "block", md: "none" }}>
+                                <Avatar
+                                    size="sm"
+                                    color={"white"}
+                                    bg={"gray.400"}
+                                    name={userName ? userName : ""}
+                                />
+                            </Box>
+                            <Box display={{ base: "none", md: "block" }}>
                                 <Text>{userName ? userName : "No name"}</Text>
                             </Box>
                         </MenuButton>
@@ -166,6 +178,32 @@ export default function Dashboard(props) {
             <Box display={{ base: "none", md: "block" }} width="16%">
                 <Sidebar />
             </Box>
+            {/* メインコンテンツ */}
+            <VStack m={5}>
+                <Card variant="elevated">
+                    <HStack>
+                        <CardHeader>店舗名：</CardHeader>
+                        <CardBody>
+                            {shopName ? shopName : "未設定"}
+                        </CardBody>
+                    </HStack>
+                </Card>
+
+                <HStack>
+                    <Card variant="elevated">
+                        <CardHeader>Elevated Variant</CardHeader>
+                        <CardBody>
+                            This card has an elevated shadow style
+                        </CardBody>
+                    </Card>
+                    <Card variant="elevated">
+                        <CardHeader>Elevated Variant</CardHeader>
+                        <CardBody>
+                            This card has an elevated shadow style
+                        </CardBody>
+                    </Card>
+                </HStack>
+            </VStack>
         </>
     );
 }

@@ -33,6 +33,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'shop_id' => 'required|exists:shops,id',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
             'icon' => 'nullable|file|mimes:jpg,png,jpeg|max:2048',
@@ -65,6 +66,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'shop_id' => 'required|exists:shops,id',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8',
             'icon' => 'nullable|string|max:255',
