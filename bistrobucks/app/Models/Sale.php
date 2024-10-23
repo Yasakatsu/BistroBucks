@@ -11,6 +11,7 @@ class Sale extends Model
 
     protected $fillable = [
         'shop_id',
+        'tax_rate_id',
         'total_sale_amount',
         'discount_amount',
         'tax_rate',

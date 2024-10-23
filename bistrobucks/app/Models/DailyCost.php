@@ -10,6 +10,14 @@ class DailyCost extends Model
 {
     use HasFactory, SoftDeletes; // ファクトリーを使う、ソフトデリートを使う
 
+    protected $fillable = [
+        'shop_id',
+        'cost_name',
+        'cost_amount',
+        'is_fixed',
+        'date',
+    ];
+
     // リレーションを定義
     public function shop() // shopsテーブルとのリレーション
     {

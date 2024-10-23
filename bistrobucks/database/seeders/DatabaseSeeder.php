@@ -22,13 +22,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::factory(10)->create(); // 10人のユーザーを作成
-
-        // それぞれのユーザーに対して、Shopを作成
-        $users->each(function ($user) {
-            Shop::factory()->create(['user_id' => $user->id]);
-        });
-
+        User::factory(10)->create();
+        Shop::factory(10)->create();
         Setting::factory(10)->create();
         DailyCost::factory(10)->create();
         Product::factory(10)->create();
