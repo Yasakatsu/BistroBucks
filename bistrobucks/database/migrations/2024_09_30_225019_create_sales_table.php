@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shop_id');  // 外部キー
-            $table->unsignedBigInteger('tax_rate_id');  // 外部キー
+            $table->foreignId('shop_id')->constrained()->onDelete('cascade');  // 店舗ID
+            $table->foreignId('tax_rate_id')->constrained()->onDelete('cascade');  // 税率ID
             $table->decimal('total_sale_amount', 8, 2);  // 売上金額(8桁の整数部分と2桁の小数部分. 例: 12345.67/ 1000円の場合は1000.00/ 100円の場合は100.00/ 10円の場合は10.00)
             $table->decimal('discount_amount', 8, 2)->nullable();  // 割引金額(8桁の整数部分と2桁の小数部分/ 例: 12345.67/ 1000円の場合は1000.00/ 100円の場合は100.00/ 10円の場合は10.00)
             $table->decimal('tax_amount', 8, 2);  // 税金額(8桁の整数部分と2桁の小数部分/ 例: 12345.67/ 1000円の場合は1000.00/ 100円の場合は100.00/ 10円の場合は10.00)
@@ -26,10 +26,6 @@ return new class extends Migration
             $table->string('consumption_type')->nullable();  // 消費タイプ（店内飲食/テイクアウト）
             $table->date('date');  // 売上発生日(必須/ 例: 2024-09-30)
             $table->timestamps();
-            // shopsテーブルのidカラムに存在しない値を挿入しようとするとエラーが発生する
-            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
-            // tax_ratesテーブルのidカラムに存在しない値を挿入しようとするとエラーが発生する
-            $table->foreign('tax_rate_id')->references('id')->on('tax_rates')->onDelete('cascade');
         });
     }
 

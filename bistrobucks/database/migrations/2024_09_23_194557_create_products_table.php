@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shop_id');  // 外部キー
+            $table->foreignId('shop_id')->constrained()->onDelete('cascade');  // 店舗ID
             $table->string('name');
             $table->string('category')->nullable();  // 商品カテゴリ
             $table->decimal('unit_price', 8, 2);  // 税込価格
@@ -25,8 +25,6 @@ return new class extends Migration
             $table->softDeletes(); // 論理削除
             $table->timestamps();
 
-            // 外部キー制約・・・shop_idはshopsテーブルのidと紐づく
-            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             // ユニーク制約(商品名とバージョン)・・・同じ商品名でもバージョンが違えば登録できる
             $table->unique(['name', 'version']);
         });

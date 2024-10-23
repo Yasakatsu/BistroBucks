@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('tax_rates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shop_id');  // 外部キー
+            $table->foreignId('shop_id')->constrained()->onDelete('cascade');  // 店舗ID(必須)
+            $table->foreignId('setting_id')->constrained()->onDelete('cascade');  // 設定ID(必須)
             $table->string('name', 255);  // 税率名(必須, 例: 通常税率/ 軽減税率)
             $table->decimal('rate', 8, 2);  // 税率(必須, 例: 0.10/ 0.08/ 0.05)
-            $table->boolean('is_default')->default(true);  // デフォルトフラグ(必須, 例: 0/ 1)
+            $table->tinyInteger('is_default')->default(1);  // デフォルトフラグ(必須, 0: デフォルトでない, 1: デフォルト)
             $table->timestamps();
-
-            // 外部キー制約
-            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
         });
     }
 

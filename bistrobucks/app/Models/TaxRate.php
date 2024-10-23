@@ -11,6 +11,7 @@ class TaxRate extends Model
 
     protected $fillable = [
         'shop_id',
+        'setting_id',
         'name',
         'rate',
         'is_default',
@@ -20,5 +21,9 @@ class TaxRate extends Model
     public function shop() // shopsテーブルとのリレーション
     {
         return $this->belongsTo(Shop::class);  // 1(Shop)対1(TaxRate)の関係
+    }
+    public function setting() // settingsテーブルとのリレーション
+    {
+        return $this->belongsTo(Setting::class);  // 1(Setting)対1(TaxRate)の関係
     }
 }

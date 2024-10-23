@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('sale_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sale_id');  // 外部キー
-            $table->unsignedBigInteger('product_id');  // 外部キー
+            $table->foreignId('sale_id')->constrained()->onDelete('cascade');  // 売上ID
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');  // 商品ID
             $table->integer('quantity');  // 数量(必須, 例: 1/ 2/ 3)
             $table->decimal('item_price', 8, 2);  // 税込販売単価
             $table->decimal('item_price_excluding_tax', 8, 2)->nullable();  // 税別販売単価
             $table->decimal('sale_amount', 8, 2);  // 合計金額(必須, 例: 1000.00/ 100.00/ 10.00)
             $table->timestamps();
-            // 外部キー制約
-            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
