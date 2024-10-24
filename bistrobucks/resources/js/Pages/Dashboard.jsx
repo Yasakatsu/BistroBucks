@@ -264,9 +264,6 @@ export default function Dashboard(props) {
                         </Box>
                     </>
                 )}
-                <Card variant="elevated">
-                    
-                </Card>
             </VStack>
         </>
     );
