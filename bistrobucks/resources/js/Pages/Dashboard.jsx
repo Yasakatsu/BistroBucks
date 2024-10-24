@@ -17,15 +17,25 @@ import {
     CardHeader,
     CardBody,
     Avatar,
+    CardFooter,
+    Flex,
+    Spacer,
 } from "@chakra-ui/react";
 import { Head, Link } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
-import { FaUserLarge } from "react-icons/fa6";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { FaCalendar, FaUserLarge } from "react-icons/fa6";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 
 export default function Dashboard(props) {
-    const { title, metaDescription, userName, shopName } = props; // プロップスから値を取得
-    const [showSidebar, setShowSidebar] = useState(false); // サイドバーの表示状態
+    // プロップスから値を取得
+    const { title, metaDescription, userName, shopName } = props;
+    // サイドバーの表示状態
+    const [showSidebar, setShowSidebar] = useState(false);
+    // カレンダーの表示状態
+    const [showCalendar, setShowCalendar] = useState(false); // 表示状態（初期値は非表示）
+    const [calendarValue, setCalendarValue] = useState(new Date()); // 初期値の設定
 
     // サイドバーの表示切り替え
     const toggleSidebar = () => {
@@ -45,6 +55,11 @@ export default function Dashboard(props) {
         };
     }, []);
 
+    //　カレンダーの情報を取得
+    const getCalendarInfo = (value, event) => {
+        console.log(value, event);
+    };
+
     return (
         <>
             {/* Head要素 */}
@@ -57,6 +72,7 @@ export default function Dashboard(props) {
                 <meta name="description" content={metaDescription} />
                 <meta name="robots" content="index,follow" />
             </Head>
+
             {/* ヘッダー */}
             <Box as="header">
                 <HStack
@@ -66,6 +82,7 @@ export default function Dashboard(props) {
                     mr={{ base: 2, md: 4 }}
                     bgGradient="linear(to-t,blue.100,blue.200,blue.400)"
                     borderRadius={"md"}
+                    boxShadow={"xl"}
                     w={"100%"}
                 >
                     <Link href="/dashboard">
@@ -108,17 +125,20 @@ export default function Dashboard(props) {
                                 <Text>{userName ? userName : "No name"}</Text>
                             </Box>
                         </MenuButton>
+
                         <MenuList>
-                            <MenuItem as="a" href={route("profile.edit")}>
-                                <HStack>
-                                    <Icon as={FaUserLarge} boxSize={4} />
-                                    <Text>プロフィール</Text>
-                                </HStack>
-                            </MenuItem>
-                            <MenuItem>
-                                <ResponsiveNavLink
-                                    method="post"
-                                    href={route("logout")}
+                            <VStack alignItems={"left"}>
+                                <MenuItem as="a" href={route("profile.edit")}>
+                                    <HStack>
+                                        <Icon as={FaUserLarge} boxSize={4} />
+                                        <Text>プロフィール</Text>
+                                    </HStack>
+                                </MenuItem>
+                                <MenuItem
+                                    as="button"
+                                    onClick={() => {
+                                        Inertia.post(route("logout"));
+                                    }}
                                 >
                                     <HStack>
                                         <Icon
@@ -127,13 +147,13 @@ export default function Dashboard(props) {
                                         />
                                         <Text>ログアウト</Text>
                                     </HStack>
-                                </ResponsiveNavLink>
-                            </MenuItem>
+                                </MenuItem>
+                            </VStack>
                         </MenuList>
                     </Menu>
                 </HStack>
             </Box>
-            {/* サイドバー */}
+            {/* サイドバー（スマホ用） */}
             {showSidebar && (
                 <>
                     {/* オーバーレイ */}
@@ -145,8 +165,8 @@ export default function Dashboard(props) {
                         height="100vh"
                         bg="rgba(0, 0, 0, 0.5)"
                         zIndex="9"
+                        onClick={toggleSidebar}
                     />
-
                     {/* サイドバー */}
                     <Box
                         position="absolute"
@@ -175,34 +195,78 @@ export default function Dashboard(props) {
                     </Box>
                 </>
             )}
+            {/* サイドバー（PC用） */}
             <Box display={{ base: "none", md: "block" }} width="16%">
                 <Sidebar />
             </Box>
+
             {/* メインコンテンツ */}
             <VStack m={5}>
+                <Flex width="100%">
+                    <Box>
+                        <Card variant="elevated">
+                            <HStack>
+                                <CardHeader
+                                    fontWeight="bold"
+                                    onClick={getCalendarInfo}
+                                >
+                                    <Icon
+                                        as={FaCalendar}
+                                        boxSize={5}
+                                        onClick={() =>
+                                            setShowCalendar(!showCalendar)
+                                        }
+                                        _hover={{
+                                            cursor: "pointer",
+                                            color: "gray.400",
+                                        }}
+                                    />
+                                </CardHeader>
+                                <CardBody>
+                                    {calendarValue.toLocaleDateString()}
+                                </CardBody>
+                            </HStack>
+                        </Card>
+                    </Box>
+                    <Spacer />
+                    <Box>
+                        <Card variant="elevated" fontSize="md">
+                            <HStack>
+                                <CardHeader fontWeight="bold">
+                                    店舗名
+                                </CardHeader>
+                                <CardBody>{shopName}</CardBody>
+                            </HStack>
+                        </Card>
+                    </Box>
+                </Flex>
+                {/* カレンダー表示 */}
+                {showCalendar && (
+                    <>
+                        <Box
+                            position="absolute"
+                            top="0"
+                            left=""
+                            width="100%"
+                            height="100vh"
+                            bg="rgba(0, 0, 0, 0.5)"
+                            zIndex="9"
+                            onClick={() => setShowCalendar(!showCalendar)}
+                        />
+                        <Box zIndex="10">
+                            <Calendar
+                                value={calendarValue}
+                                onChange={(value) => {
+                                    setCalendarValue(value);
+                                    setShowCalendar(false);
+                                }}
+                            />
+                        </Box>
+                    </>
+                )}
                 <Card variant="elevated">
-                    <HStack>
-                        <CardHeader>店舗名：</CardHeader>
-                        <CardBody>
-                            {shopName ? shopName : "未設定"}
-                        </CardBody>
-                    </HStack>
+                    
                 </Card>
-
-                <HStack>
-                    <Card variant="elevated">
-                        <CardHeader>Elevated Variant</CardHeader>
-                        <CardBody>
-                            This card has an elevated shadow style
-                        </CardBody>
-                    </Card>
-                    <Card variant="elevated">
-                        <CardHeader>Elevated Variant</CardHeader>
-                        <CardBody>
-                            This card has an elevated shadow style
-                        </CardBody>
-                    </Card>
-                </HStack>
             </VStack>
         </>
     );
