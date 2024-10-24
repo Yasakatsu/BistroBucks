@@ -24,9 +24,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () { // ダッシュボード
     $user = auth()->user(); // ログインユーザーを取得
-    $shopName = Shop::join('settings', 'shops.id', '=', 'settings.shop_id')// shopsテーブルとsettingsテーブルを結合
-        ->where('shops.id', $user->shop_id)// ログインユーザーの店舗ID
-        ->value('shops.name'); // shopsテーブルから取得    
+    $shopName = Shop::query() // Shopモデルを使い、クエリビルダを取得
+        ->where('user_id', $user->id) // ログインユーザーのIDを条件に指定
+        ->value('name'); // nameカラムの値を取得
     return Inertia::render(
         'Dashboard',
         [
